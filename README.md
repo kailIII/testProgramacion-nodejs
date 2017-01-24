@@ -1,13 +1,14 @@
 ## INSTALACION  ##
 `
-1.- Instalar NodeJS y NPM`: [Aqui](http://www.w3resource.com/node.js/installing-node.js-windows-and-linux.php) para Linux 	y Windows.   Para instalar en sistema OSX [Aquí](https://coolestguidesontheplanet.com/installing-node-js-on-macos/). Si quiere tener varias verrsiones de node puede usar [nvm](https://github.com/creationix/nvm)
+1.- Instalar NodeJS y NPM`: 
+Para sistemas operativos Linux 	y Windows [Ingrese Aqui](http://www.w3resource.com/node.js/installing-node.js-windows-and-linux.php)
+Para sistemas operativos OSX [Ingrese Aqui](https://coolestguidesontheplanet.com/installing-node-js-on-macos/). 
+Si necesita utilizar varias versiones de node puede usar [nvm](https://github.com/creationix/nvm)
 
 2.- Instalar dependencias:   
 ```
 $ npm install
 ```
-
-`
 
 
 #PROGRAMACION#
