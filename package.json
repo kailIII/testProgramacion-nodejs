@@ -1,0 +1,29 @@
+{
+  "name": "Funcione varias utilizando Nodejs ",
+  "version": "1.0.0",
+  "description": "Funciones varias",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:mortegac/testProgramacion-nodejs.git"
+  },
+  "keywords": [
+    "Nodejs",
+    "convert",
+    "letters",
+    "into",
+    "number"
+  ],
+  "author": "Manuel Ortega Carcamo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mortegac/testProgramacion-nodejs/issues"
+  },
+  "homepage": "https://github.com/mortegac/testProgramacion-nodejs#readme",
+  "dependencies": {
+    "prompt": "^1.0.0"
+  }
+}
