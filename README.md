@@ -15,8 +15,14 @@ $ npm install
 ___________________________________________________________________________
 
 ### 1.- Determinar la cantidad de 0`s a la derecha de n!(Factorial) ###
-
-
+	
+	Script que calcula el factorial de un número, calcula la cantidad de zeros
+	que tiene el factorial calculado
+	
+	Para Ejecutarlo:  En el terminal escribir:
+	```
+	$ node CalculaFactorial.js
+	```
 
 
 ### 2.- Transformar de Numeros a letras ###
