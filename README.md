@@ -21,7 +21,7 @@ ___________________________________________________________________________
 	
 	Para Ejecutarlo:  En el terminal escribir:
 	```
-	$ node [CalculaFactorial.js](https://github.com/mortegac/testProgramacion-nodejs/blob/master/CalculaFactorial.js)
+	$ node CalculaFactorial.js
 	```
 
 ![alt tag](http://apgca.cl/bin/test/factorial.png)
