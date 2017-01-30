@@ -1,4 +1,5 @@
-
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css');
 /*=========================================================
 cleaning browser Styles
 =========================================================*/
@@ -12,32 +13,22 @@ caption, th { text-align: left; font-weight: normal; font-style: normal; }
 acronym, abbr, fieldset, img { border: 0;}
 :focus { outline: 0; }
 /*=========================================================*/
-body {
-   /* width : 960px;*/
-   /* margin: 0 auto;
-    margin-left : auto;
-    margin-right : auto;
-    padding : 0px;
-    
-    text-align:center;*/
-}
 
-.padre{
-        /*width:100%; */
-        margin: 0 auto;
-        background-color: yellow;
+body{ font-family: 'Roboto', sans-serif; }
+
+.padre{ 
+    position: relative;
+    width: 100%;
+
+}
+.hijo {
+    position: absolute;
+    width: 960px;
+    left: 50%;
+    transform: translate(-50%, -0%);
 }
 .container {
-	margin-left:auto;
-    margin-right:auto;
-    padding:0px;
-
     width: 960px;
-	margin: 0 auto;/**/
-
-
-
-    background-color: lightgrey;
     border: 1px #cce solid;
     display: -ms-inline-flexbox;
     display: -webkit-inline-flex;
@@ -58,30 +49,7 @@ body {
     -ms-flex-align: start;
     align-items: flex-start;
     }
-/*.containerData {
-    width: 960px;
-    margin: 0 auto;
-    background-color: lightgrey;
-    border: 1px #cce solid;
-    display: -ms-inline-flexbox;
-    display: -webkit-inline-flex;
-    display: inline-flex;
-    -webkit-flex-direction: row;
-    -ms-flex-direction: row;
-    flex-direction: row;
-    -webkit-flex-wrap: nowrap;
-    -ms-flex-wrap: nowrap;
-    flex-wrap: nowrap;
-    -webkit-justify-content: flex-start;
-    -ms-flex-pack: start;
-    justify-content: flex-start;
-    -webkit-align-content: stretch;
-    -ms-flex-line-pack: stretch;
-    align-content: stretch;
-    -webkit-align-items: flex-start;
-    -ms-flex-align: start;
-    align-items: flex-start;
-    }*/    
+  
 
 .menu {
     -webkit-order: 0;
@@ -92,79 +60,48 @@ body {
     flex: 0 1 auto;
     -webkit-align-self: auto;
     -ms-flex-item-align: auto;
-    align-self: auto;
-    border: 1px solid #cee; 
     }
 
 .dia{ 
 	width: 12%; 
-	color:gray; 
-	border: 1px #cce solid; 
-	-webkit-border-radius: 3px;
+    background-color: #e8503a;
+    color: #fff;
+    height: 25px;
+    text-align: left;
+    padding:2px 2px; 
+    font-size: 14px;
 }
 .ico{ 
 	width: 8%; 
-	color:gray; 
-	border: 1px #cce solid; 
-	-webkit-border-radius: 3px;
+    background-color: #e8503a;
+    color: #fff;
+    height: 25px;
+    padding:2px 2px; 
+    font-size: 14px; 
 }
-.left{ text-align: left; }
-.right{ text-align: right; }
+.txtVerde{
+    color:#81b181;
+}
+.left{ text-align: left; padding-left: 5px; }
+.right{ text-align: right; padding-right: 5px; }
 
 .horaAgenda{ 
 	width: 8%; 
-	color:gray; 
-	border: 1px #cce solid; 
-	-webkit-border-radius: 3px;
+	color:#db7878;
+    font-size: 12px;
 }
 .diaAgenda{ 
-	width: 12%; 
-	color:gray; 
-	border: 1px #cce solid; 
-	-webkit-border-radius: 3px;
-	background-color: white;
-}
-/*
-.flex-item:nth-child(2) {
-    -webkit-order: 0;
-    -ms-flex-order: 0;
-    order: 0;
-    -webkit-flex: 0 1 auto;
-    -ms-flex: 0 1 auto;
-    flex: 0 1 auto;
-    -webkit-align-self: auto;
-    -ms-flex-item-align: auto;
-    align-self: auto;
-    }
-
-.flex-item:nth-child(3) {
-    -webkit-order: 0;
-    -ms-flex-order: 0;
-    order: 0;
-    -webkit-flex: 0 1 auto;
-    -ms-flex: 0 1 auto;
-    flex: 0 1 auto;
-    -webkit-align-self: auto;
-    -ms-flex-item-align: auto;
-    align-self: auto;
-    }
-
-
-
-
-.flex-container {
-    display: -webkit-flex;
-    display: flex;
-    width: 960px;
-    background-color: lightgrey;
-    border: 1px #cce solid;
+    width: 12%; 
+    background-color: rgba(249, 255, 156, 0.35);
+    color: #217dc6;
+    height: 25px;
+    text-align: center;
+    padding:2px 2px; 
+    font-size: 14px;
+    padding:5px 5px;
 }
 
-.menu {
-
-    margin: 0px;
-
-}
-.menu .ico{ width: 1%; color:red; }
-.menu .dia{ width: 14%; color:gray; border: 1px #cce solid; -webkit-border-radius: 3px;}
-*/
+.diaAgenda > * {
+    display: table-cell;
+    vertical-align: middle;
+  }

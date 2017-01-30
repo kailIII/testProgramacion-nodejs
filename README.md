@@ -23,6 +23,10 @@ ___________________________________________________________________________
 	```
 	$ node CalculaFactorial.js
 	```
+	![alt tag](http://apgca.cl/bin/test/factorial.png)
+
+
+
 
 
 ### 2.- Transformar de Numeros a letras ###
@@ -33,6 +37,7 @@ ___________________________________________________________________________
 	```
 	$ node NumeroaLetras.js
 	```
+	![alt tag](http://apgca.cl/bin/test/numeroLetras.png)
 
 
 
@@ -53,7 +58,10 @@ ___________________________________________________________________________
 
 ### 2.- Desarrollo de mazo de cartas (orientado a objetos)
 
-### 3.- Desarrollo de agenda médica desde un objeto Json
+### 3.- Desarrollo de agenda médica desde un objeto Json.  Los rangos de los horarios superiores e inferiores se calculan según lso datos del Json
+![alt tag](http://apgca.cl/bin/test/agenda.png)
+
+
 
 
 

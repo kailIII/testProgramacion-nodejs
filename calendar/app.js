@@ -55,17 +55,40 @@
 		3 = Hora iguales
 -------------------------------------------------------*/
 function CompararHoras(sHora1, sHora2, sTipo) { 
-     
+     if (sTipo === 3) 
+     	console.log("hora1: [" + sHora1 + "]  hora2: [" + sHora2 + "]");
+
     var arHora1 = sHora1.split(":"); 
     var arHora2 = sHora2.split(":"); 
      
+	
+
     // Obtener horas y minutos (hora 1) 
     var hh1 = parseInt(arHora1[0],10); 
+    	// hh1 = hh1.toString();
     var mm1 = parseInt(arHora1[1],10); 
+    	// mm1 = mm1.toString();
+
+ //    if (hh1.length < 2) {
+	// 	hh1 = "0"+hh1;
+	// }
+
+	// if (mm1.length < 2) {
+	// 	mm1 = "0"+mm1;
+	// }
+
 
     // Obtener horas y minutos (hora 2) 
     var hh2 = parseInt(arHora2[0],10); 
     var mm2 = parseInt(arHora2[1],10); 
+
+
+	// if (sTipo === 3) 
+	console.log("arHora1: " + hh1 + "-" + mm1);
+	console.log("arHora2: " + hh2 + "-" + mm2);
+	//console.log("arHora2: " + parseInt(arHora2[0],10) + "-" + parseInt(arHora2[1],10));
+	
+
 
 	if (sTipo === 1)  //1=Retorna la hora mayor
 	{
@@ -92,7 +115,7 @@ function CompararHoras(sHora1, sHora2, sTipo) {
 	Genero el html para pintar la agenda
 -------------------------------------------------------*/
 function VerificaDia(Dia,Hora, citas) {
-	var txt="-";
+	var txt="<i class='icon ion-plus-circled txtVerde'></i>  ";
 	var obj = JSON.parse(citas);
 	//console.log(obj);
 
@@ -104,7 +127,7 @@ function VerificaDia(Dia,Hora, citas) {
 					 if(i === 'lunes') 
 					 	if(CompararHoras(obj[i][x].hora_inicio, Hora, 3) === 1)
 					 		//dia=i;
-					 		txt = obj[i][x].nombre;
+					 		txt = "<i class='icon ion-calendar'> " + obj[i][x].nombre + "</i>";
 				}
 			}
 	if (Dia===2) //Martes  
@@ -112,7 +135,7 @@ function VerificaDia(Dia,Hora, citas) {
 				for(var x in obj[i]) {
 					 if(i === 'martes') 
 					 	if(CompararHoras(obj[i][x].hora_inicio, Hora, 3) === 1)
-					 		txt = obj[i][x].nombre;
+					 		txt = "<i class='icon ion-calendar'> " + obj[i][x].nombre + "</i>";
 				}
 			}
 	if (Dia===3) //Miercoles  
@@ -120,7 +143,7 @@ function VerificaDia(Dia,Hora, citas) {
 				for(var x in obj[i]) {
 					 if(i === 'miercoles') 
 					 	if(CompararHoras(obj[i][x].hora_inicio, Hora, 3) === 1)
-					 		txt = obj[i][x].nombre;
+					 		txt = "<i class='icon ion-calendar'> " + obj[i][x].nombre + "</i>";
 				}
 			}
 	if (Dia===4) //Jueves  
@@ -128,7 +151,7 @@ function VerificaDia(Dia,Hora, citas) {
 				for(var x in obj[i]) {
 					 if(i === 'jueves') 
 					 	if(CompararHoras(obj[i][x].hora_inicio, Hora, 3) === 1)
-					 		txt = obj[i][x].nombre;
+					 		txt = "<i class='icon ion-calendar'> " + obj[i][x].nombre + "</i>";
 				}
 			}
 	if (Dia===5) //Viernes
@@ -136,8 +159,8 @@ function VerificaDia(Dia,Hora, citas) {
 				for(var x in obj[i]) {
 					 if(i === 'viernes') 
 					 	if(CompararHoras(obj[i][x].hora_inicio, Hora, 3) === 1)
-					 		txt = obj[i][x].nombre;
-					 		console.log("Hora Viernes: " + Hora  + "-" + obj[i][x].hora_inicio);
+					 		txt = "<i class='icon ion-calendar'> " + obj[i][x].nombre + "</i>";
+					 		//console.log("Hora Viernes: " + Hora  + "-" + obj[i][x].hora_inicio);
 				}
 			}
 	if (Dia===6) //Sabado  
@@ -146,7 +169,7 @@ function VerificaDia(Dia,Hora, citas) {
 					 if(i === 'sabado')  
 					 	if(CompararHoras(obj[i][x].hora_inicio, Hora, 3) === 1)
 					 	{
-					 		txt = obj[i][x].nombre;
+					 		txt = "<i class='icon ion-calendar'></i> " + obj[i][x].nombre;
 					 	}
 				}
 			}
@@ -155,7 +178,7 @@ function VerificaDia(Dia,Hora, citas) {
 				for(var x in obj[i]) {
 					 if(i === 'domingo') 
 					 	if(CompararHoras(obj[i][x].hora_inicio, Hora, 3) === 1)
-					 		txt = obj[i][x].nombre;
+					 		txt = "<i class='icon ion-calendar'></i> " + obj[i][x].nombre;
 				}
 			}									
 
@@ -192,15 +215,15 @@ function GeneraHtml(MatrizHrs, citas) {
 
 				//console.log("HoraMatriz:" + MatrizHrs[i] + " -Hora:" + Hora + " - obj" + JSON.stringify(obj));
 				//CompararHoras(MatrizHrs[i], obj.martes[1].hora_inicio, 3)
-				HoraConsulta = MatrizHrs[i] + ":00";
+				//HoraConsulta = MatrizHrs[i] + ":00";
 				Body+= "<div class='container'><div class='menu horaAgenda left'>" + MatrizHrs[i] + "</div>" + 
-						"<div class='menu diaAgenda'>" + VerificaDia(1, HoraConsulta, citas)  + "</div>" +
-						"<div class='menu diaAgenda'>" + VerificaDia(2, HoraConsulta, citas)  + "</div>  " +
-						"<div class='menu diaAgenda'>" + VerificaDia(3, HoraConsulta, citas)  + "</div>  " +
-						"<div class='menu diaAgenda'>" + VerificaDia(4, HoraConsulta, citas)  + "</div>  " +
-						"<div class='menu diaAgenda'>" + VerificaDia(5, HoraConsulta, citas)  + "</div>  " +
-						"<div class='menu diaAgenda'>" + VerificaDia(6, HoraConsulta, citas)  + "</div>  " +
-						"<div class='menu diaAgenda'>" + VerificaDia(7, HoraConsulta, citas)  + "</div> " +
+						"<div class='menu diaAgenda'>" + VerificaDia(1, MatrizHrs[i], citas)  + "</div>" +
+						"<div class='menu diaAgenda'>" + VerificaDia(2, MatrizHrs[i], citas)  + "</div>  " +
+						"<div class='menu diaAgenda'>" + VerificaDia(3, MatrizHrs[i], citas)  + "</div>  " +
+						"<div class='menu diaAgenda'>" + VerificaDia(4, MatrizHrs[i], citas)  + "</div>  " +
+						"<div class='menu diaAgenda'>" + VerificaDia(5, MatrizHrs[i], citas)  + "</div>  " +
+						"<div class='menu diaAgenda'>" + VerificaDia(6, MatrizHrs[i], citas)  + "</div>  " +
+						"<div class='menu diaAgenda'>" + VerificaDia(7, MatrizHrs[i], citas)  + "</div> " +
 						"<div class='menu horaAgenda right'>" + MatrizHrs[i] + "</div></div>";
 		}
 
@@ -249,9 +272,6 @@ function CalculaRangos(citas){
 	
 -------------------------------------------------------*/
 	function Agenda(citas) {
-		//console.log("ENTRE " + JSON.stringify(obj));
-		//console.log("obj:" + JSON.stringify(obj));
-
 		var obj = JSON.parse(citas);
 		var Rangos = CalculaRangos(citas);
 			console.log("horaIni:" + Rangos['inicio']);
