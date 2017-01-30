@@ -1,0 +1,170 @@
+
+/*=========================================================
+cleaning browser Styles
+=========================================================*/
+body, div, dl, dt, dd, li, pre,
+form, fieldset, input, textarea, p, blockquote, th, td, button { margin: 0; padding: 0; }
+h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 100%; font-weight: normal; }
+address, caption, cite, code, dfn, em, strong, var { font-style: normal; font-weight: normal; }
+ol, ul { list-style: none; margin: 0; padding: 0; }
+table { border-collapse: collapse; border-spacing: 0; }
+caption, th { text-align: left; font-weight: normal; font-style: normal; }
+acronym, abbr, fieldset, img { border: 0;}
+:focus { outline: 0; }
+/*=========================================================*/
+body {
+   /* width : 960px;*/
+   /* margin: 0 auto;
+    margin-left : auto;
+    margin-right : auto;
+    padding : 0px;
+    
+    text-align:center;*/
+}
+
+.padre{
+        /*width:100%; */
+        margin: 0 auto;
+        background-color: yellow;
+}
+.container {
+	margin-left:auto;
+    margin-right:auto;
+    padding:0px;
+
+    width: 960px;
+	margin: 0 auto;/**/
+
+
+
+    background-color: lightgrey;
+    border: 1px #cce solid;
+    display: -ms-inline-flexbox;
+    display: -webkit-inline-flex;
+    display: inline-flex;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-align-content: stretch;
+    -ms-flex-line-pack: stretch;
+    align-content: stretch;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    }
+/*.containerData {
+    width: 960px;
+    margin: 0 auto;
+    background-color: lightgrey;
+    border: 1px #cce solid;
+    display: -ms-inline-flexbox;
+    display: -webkit-inline-flex;
+    display: inline-flex;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -webkit-justify-content: flex-start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -webkit-align-content: stretch;
+    -ms-flex-line-pack: stretch;
+    align-content: stretch;
+    -webkit-align-items: flex-start;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    }*/    
+
+.menu {
+    -webkit-order: 0;
+    -ms-flex-order: 0;
+    order: 0;
+    -webkit-flex: 0 1 auto;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+    -webkit-align-self: auto;
+    -ms-flex-item-align: auto;
+    align-self: auto;
+    border: 1px solid #cee; 
+    }
+
+.dia{ 
+	width: 12%; 
+	color:gray; 
+	border: 1px #cce solid; 
+	-webkit-border-radius: 3px;
+}
+.ico{ 
+	width: 8%; 
+	color:gray; 
+	border: 1px #cce solid; 
+	-webkit-border-radius: 3px;
+}
+.left{ text-align: left; }
+.right{ text-align: right; }
+
+.horaAgenda{ 
+	width: 8%; 
+	color:gray; 
+	border: 1px #cce solid; 
+	-webkit-border-radius: 3px;
+}
+.diaAgenda{ 
+	width: 12%; 
+	color:gray; 
+	border: 1px #cce solid; 
+	-webkit-border-radius: 3px;
+	background-color: white;
+}
+/*
+.flex-item:nth-child(2) {
+    -webkit-order: 0;
+    -ms-flex-order: 0;
+    order: 0;
+    -webkit-flex: 0 1 auto;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+    -webkit-align-self: auto;
+    -ms-flex-item-align: auto;
+    align-self: auto;
+    }
+
+.flex-item:nth-child(3) {
+    -webkit-order: 0;
+    -ms-flex-order: 0;
+    order: 0;
+    -webkit-flex: 0 1 auto;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+    -webkit-align-self: auto;
+    -ms-flex-item-align: auto;
+    align-self: auto;
+    }
+
+
+
+
+.flex-container {
+    display: -webkit-flex;
+    display: flex;
+    width: 960px;
+    background-color: lightgrey;
+    border: 1px #cce solid;
+}
+
+.menu {
+
+    margin: 0px;
+
+}
+.menu .ico{ width: 1%; color:red; }
+.menu .dia{ width: 14%; color:gray; border: 1px #cce solid; -webkit-border-radius: 3px;}
+*/

@@ -39,4 +39,21 @@ ___________________________________________________________________________
 ### 3.- Algoritmo que visita los movimientos de un caballo en un tablero de NxN ###
 
 
+#MODELO DE DATOS#
+___________________________________________________________________________
+
+### 1.- Modelo de datos relacional que permita administrar los cursos de un colegio. Cada cursos tiene un profesor a cargo, cada alumno 
+
+
+
+#DISEÑO#
+___________________________________________________________________________
+
+### 1.- Desarrollo de Clases (orientado a objetos) que cumplan con el modelo de datos Colegio
+
+### 2.- Desarrollo de mazo de cartas (orientado a objetos)
+
+### 3.- Desarrollo de agenda médica desde un objeto Json
+
+
 
