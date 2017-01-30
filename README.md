@@ -70,6 +70,8 @@ ___________________________________________________________________________
 
 [Ver Dump Base de Datos en Mysql](https://github.com/mortegac/testProgramacion-nodejs/blob/master/modelo-datos/COLEGIO-NEW_2017-01-30.sql) 
 
+#### 6.- La respuesta es la letra b) 190 tuplas#### 
+
 
 #DISEÑO#
 ___________________________________________________________________________
