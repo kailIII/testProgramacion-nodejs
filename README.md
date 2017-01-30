@@ -51,6 +51,11 @@ ___________________________________________________________________________
 
 #### 1.- Modelo de datos relacional que permita administrar los cursos de un colegio. Cada cursos tiene un profesor a cargo, cada alumno  ####
 
+[Ver Carpeta](https://github.com/mortegac/testProgramacion-nodejs/tree/master/modelo-datos)
+
+![alt tag](http://apgca.cl/bin/test/ModeloColegio.png)
+
+
 
 
 #DISEÑO#
