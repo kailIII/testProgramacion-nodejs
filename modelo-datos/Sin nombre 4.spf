@@ -1,0 +1,1155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ContentFilters</key>
+	<dict/>
+	<key>auto_connect</key>
+	<true/>
+	<key>data</key>
+	<dict>
+		<key>connection</key>
+		<dict>
+			<key>database</key>
+			<string>COLEGIO-NEW</string>
+			<key>host</key>
+			<string>159.203.170.247</string>
+			<key>kcid</key>
+			<string>-1159695766338805101</string>
+			<key>name</key>
+			<string>DESARROLLO DGCA.IO</string>
+			<key>rdbms_type</key>
+			<string>mysql</string>
+			<key>ssh_host</key>
+			<string>159.203.170.247</string>
+			<key>ssh_keyLocation</key>
+			<string>~/.ssh/id_rsa</string>
+			<key>ssh_keyLocationEnabled</key>
+			<integer>1</integer>
+			<key>ssh_user</key>
+			<string>mortega</string>
+			<key>sslCACertFileLocation</key>
+			<string></string>
+			<key>sslCACertFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>sslCertificateFileLocation</key>
+			<string></string>
+			<key>sslCertificateFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>sslKeyFileLocation</key>
+			<string></string>
+			<key>sslKeyFileLocationEnabled</key>
+			<integer>0</integer>
+			<key>type</key>
+			<string>SPSSHTunnelConnection</string>
+			<key>useSSL</key>
+			<integer>0</integer>
+			<key>user</key>
+			<string>TENISGCA</string>
+		</dict>
+		<key>session</key>
+		<dict>
+			<key>connectionEncoding</key>
+			<string>utf8</string>
+			<key>contentPageNumber</key>
+			<integer>1</integer>
+			<key>contentSelection</key>
+			<data>
+			YnBsaXN0MDDUAQIDBAUGJCVYJHZlcnNpb25YJG9iamVjdHNZJGFy
+			Y2hpdmVyVCR0b3ASAAGGoKgHCBMUFRYaIVUkbnVsbNMJCgsMDxJX
+			TlMua2V5c1pOUy5vYmplY3RzViRjbGFzc6INDoACgAOiEBGABIAF
+			gAdUdHlwZVRyb3dzXxAdU2VsZWN0aW9uRGV0YWlsVHlwZU5TSW5k
+			ZXhTZXTSFwsYGVxOU1JhbmdlQ291bnQQAIAG0hscHR5aJGNsYXNz
+			bmFtZVgkY2xhc3Nlc1pOU0luZGV4U2V0oh8gWk5TSW5kZXhTZXRY
+			TlNPYmplY3TSGxwiI1xOU0RpY3Rpb25hcnmiIiBfEA9OU0tleWVk
+			QXJjaGl2ZXLRJidUZGF0YYABAAgAEQAaACMALQAyADcAQABGAE0A
+			VQBgAGcAagBsAG4AcQBzAHUAdwB8AIEAoQCmALMAtQC3ALwAxwDQ
+			ANsA3gDpAPIA9wEEAQcBGQEcASEAAAAAAAACAQAAAAAAAAAoAAAA
+			AAAAAAAAAAAAAAABIw==
+			</data>
+			<key>contentSortColIsAsc</key>
+			<true/>
+			<key>contentViewport</key>
+			<string>{{0, 0}, {694, 456}}</string>
+			<key>isToolbarVisible</key>
+			<true/>
+			<key>queries</key>
+			<string>
+
+
+/*==========================================================================================
+	Listado de Alumnos con promedio rojo
+==========================================================================================*/ 
+
+SELECT 
+	CONCAT(`ALU_ApeMat`, ' ' , `ALU_ApePat` , ' ' , `ALU_Nombres`) as Alumno,
+	t2.`CUR_Nombre` as Curso,
+	
+	
+	(SELECT 
+		IFNULL(
+  			ROUND(SUM(`NOP_Nota`) / COUNT(`NOP_Nota`))   #Redondeo hacia arriba el Promedio
+  			,0) 
+  		FROM `NOtasPruebas` as t10
+			INNER JOIN `PRUebas` as t20
+			ON t10.`PRU_Id`= t20.`PRU_Id`
+  		WHERE 	t10.`ALU_Id` = t1.`ALU_Id`
+  		AND 	t20.`CUR_Id` = t2.`CUR_Id`
+  		)as PromedioRojo
+		
+	FROM `CUrsosPersonas` as t1
+	INNER JOIN `CURsos` as t2
+		ON t1.`CUR_Id`= t2.`CUR_Id`
+
+	INNER JOIN ALUmnos as t3
+		ON t1.`ALU_Id`= t3.`ALU_Id`
+
+	
+		
+	WHERE t1.`CUP_Estado`  = 1
+	AND (SELECT 
+		IFNULL(
+  			ROUND(SUM(`NOP_Nota`) / COUNT(`NOP_Nota`))   #Redondeo hacia arriba el Promedio
+  			,0) 
+  		FROM `NOtasPruebas` as t10
+			INNER JOIN `PRUebas` as t20
+			ON t10.`PRU_Id`= t20.`PRU_Id`
+  		WHERE 	t10.`ALU_Id` = t1.`ALU_Id`
+  		AND 	t20.`CUR_Id` = t2.`CUR_Id`
+  		) &lt;= 39
+  	AND (SELECT 
+		IFNULL(
+  			ROUND(SUM(`NOP_Nota`) / COUNT(`NOP_Nota`))   #Redondeo hacia arriba el Promedio
+  			,0) 
+  		FROM `NOtasPruebas` as t10
+			INNER JOIN `PRUebas` as t20
+			ON t10.`PRU_Id`= t20.`PRU_Id`
+  		WHERE 	t10.`ALU_Id` = t1.`ALU_Id`
+  		AND 	t20.`CUR_Id` = t2.`CUR_Id`
+  		) &gt; 0
+  </string>
+			<key>view</key>
+			<string>SP_VIEW_CUSTOMQUERY</string>
+			<key>windowVerticalDividerPosition</key>
+			<real>230</real>
+		</dict>
+	</dict>
+	<key>encrypted</key>
+	<false/>
+	<key>format</key>
+	<string>connection</string>
+	<key>queryFavorites</key>
+	<array/>
+	<key>queryHistory</key>
+	<array>
+		<string>/*==========================================================================================
+	Listado de Alumnos y sus promedios por Curso
+==========================================================================================*/ 
+
+SELECT 
+	CONCAT(`ALU_ApeMat`, ' ' , `ALU_ApePat` , ' ' , `ALU_Nombres`) as Alumno,
+	t2.`CUR_Nombre` as Curso,
+	
+	
+	(SELECT 
+		IFNULL(
+  			ROUND(SUM(`NOP_Nota`) / COUNT(`NOP_Nota`))   #Redondeo hacia arriba el Promedio
+  			,0) 
+  		FROM `NOtasPruebas` as t10
+			INNER JOIN `PRUebas` as t20
+			ON t10.`PRU_Id`= t20.`PRU_Id`
+  		WHERE 	t10.`ALU_Id` = t1.`ALU_Id`
+  		AND 	t20.`CUR_Id` = t2.`CUR_Id`
+  		)as PromedioRojo
+		
+	FROM `CUrsosPersonas` as t1
+	INNER JOIN `CURsos` as t2
+		ON t1.`CUR_Id`= t2.`CUR_Id`
+
+	INNER JOIN ALUmnos as t3
+		ON t1.`ALU_Id`= t3.`ALU_Id`
+
+	
+		
+	WHERE t1.`CUP_Estado`  = 1
+	AND (SELECT 
+		IFNULL(
+  			ROUND(SUM(`NOP_Nota`) / COUNT(`NOP_Nota`))   #Redondeo hacia arriba el Promedio
+  			,0) 
+  		FROM `NOtasPruebas` as t10
+			INNER JOIN `PRUebas` as t20
+			ON t10.`PRU_Id`= t20.`PRU_Id`
+  		WHERE 	t10.`ALU_Id` = t1.`ALU_Id`
+  		AND 	t20.`CUR_Id` = t2.`CUR_Id`
+  		) &lt;= 39
+  	AND (SELECT 
+		IFNULL(
+  			ROUND(SUM(`NOP_Nota`) / COUNT(`NOP_Nota`))   #Redondeo hacia arriba el Promedio
+  			,0) 
+  		FROM `NOtasPruebas` as t10
+			INNER JOIN `PRUebas` as t20
+			ON t10.`PRU_Id`= t20.`PRU_Id`
+  		WHERE 	t10.`ALU_Id` = t1.`ALU_Id`
+  		AND 	t20.`CUR_Id` = t2.`CUR_Id`
+  		) &gt; 0</string>
+		<string>/*==========================================================================================
+	Listado de Alumnos y sus promedios por Curso
+==========================================================================================*/ 
+
+SELECT 
+	CONCAT(`ALU_ApeMat`, ' ' , `ALU_ApePat` , ' ' , `ALU_Nombres`) as Alumno,
+	t2.`CUR_Nombre` as Curso,
+	
+	
+	(SELECT 
+		IFNULL(
+  			ROUND(SUM(`NOP_Nota`) / COUNT(`NOP_Nota`))   #Redondeo hacia arriba el Promedio
+  			,0) 
+  		FROM `NOtasPruebas` as t10
+			INNER JOIN `PRUebas` as t20
+			ON t10.`PRU_Id`= t20.`PRU_Id`
+  		WHERE 	t10.`ALU_Id` = t1.`ALU_Id`
+  		AND 	t20.`CUR_Id` = t2.`CUR_Id`
+  		)as PromedioRojo
+		
+	FROM `CUrsosPersonas` as t1
+	INNER JOIN `CURsos` as t2
+		ON t1.`CUR_Id`= t2.`CUR_Id`
+
+	INNER JOIN ALUmnos as t3
+		ON t1.`ALU_Id`= t3.`ALU_Id`
+
+	
+		
+	WHERE t1.`CUP_Estado`  = 1
+	AND (SELECT 
+		IFNULL(
+  			ROUND(SUM(`NOP_Nota`) / COUNT(`NOP_Nota`))   #Redondeo hacia arriba el Promedio
+  			,0) 
+  		FROM `NOtasPruebas` as t10
+			INNER JOIN `PRUebas` as t20
+			ON t10.`PRU_Id`= t20.`PRU_Id`
+  		WHERE 	t10.`ALU_Id` = t1.`ALU_Id`
+  		AND 	t20.`CUR_Id` = t2.`CUR_Id`
+  		) &lt;= 39</string>
+		<string>/*==========================================================================================
+	Listado de Alumnos y sus promedios por Curso
+==========================================================================================*/ 
+
+SELECT 
+	CONCAT(`ALU_ApeMat`, ' ' , `ALU_ApePat` , ' ' , `ALU_Nombres`) as Alumno,
+	t2.`CUR_Nombre` as Curso,
+	
+	
+	(SELECT 
+		IFNULL(
+  			ROUND(SUM(`NOP_Nota`) / COUNT(`NOP_Nota`))   #Redondeo hacia arriba el Promedio
+  			,0) 
+  		FROM `NOtasPruebas` as t10
+			INNER JOIN `PRUebas` as t20
+			ON t10.`PRU_Id`= t20.`PRU_Id`
+  		WHERE 	t10.`ALU_Id` = t1.`ALU_Id`
+  		AND 	t20.`CUR_Id` = t2.`CUR_Id`
+  		)as PROMEDIO  
+		
+	FROM `CUrsosPersonas` as t1
+	INNER JOIN `CURsos` as t2
+		ON t1.`CUR_Id`= t2.`CUR_Id`
+
+	INNER JOIN ALUmnos as t3
+		ON t1.`ALU_Id`= t3.`ALU_Id`
+
+	
+		
+	WHERE t1.`CUP_Estado`  = 1</string>
+		<string>/*==========================================================================================
+	Calculo del promedio de notas de un Alumno en un Curso
+
+	CURSOS
+	1 = PROGRAMACION
+	2 = BASES DE DATOS
+	3 = DESARROLLO WEB
+	
+	ALUMNOS 
+	1 = ALEJANDRO	VERGARA	GODOY
+	2 = MARIA PAZ	OLGUIN	GAJARDO
+==========================================================================================*/ 
+
+SELECT 
+	t3.`CUR_Nombre` as Curso,
+	CONCAT(`ALU_ApeMat`, ' ' , `ALU_ApePat` , ' ' , `ALU_Nombres`) as Alumno,
+
+  	IFNULL(
+  			ROUND(SUM(`NOP_Nota`) / COUNT(`NOP_Nota`))   #Redondeo hacia arriba el Promedio
+  			,0) as PROMEDIO  
+  	
+  	
+  	FROM `NOtasPruebas` as t1
+	INNER JOIN `PRUebas` as t2
+		ON t1.`PRU_Id`= t2.`PRU_Id`
+	
+	INNER JOIN `CURsos` as t3
+		ON t2.`CUR_Id`= t3.`CUR_Id`
+	
+	INNER JOIN ALUmnos as t4
+		ON t1.`ALU_Id`= t4.`ALU_Id`
+	
+	WHERE t3.`CUR_Id` = 1
+	AND t1.`ALU_Id` = 1</string>
+		<string>/*==========================================================================================
+	Listado de Alumno en un Curso
+
+	CURSOS
+	1 = PROGRAMACION
+	2 = BASES DE DATOS
+	3 = DESARROLLO WEB
+	
+	ALUMNOS 
+	1 = ALEJANDRO	VERGARA	GODOY
+	2 = MARIA PAZ	OLGUIN	GAJARDO
+==========================================================================================*/ 
+
+
+
+
+SELECT 
+	t3.`CUR_Nombre` as Curso,
+	CONCAT(`ALU_ApeMat`, ' ' , `ALU_ApePat` , ' ' , `ALU_Nombres`) as Alumno
+  	
+  FROM `NOtasPruebas` as t1
+	INNER JOIN `PRUebas` as t2
+	ON t1.`PRU_Id`= t2.`PRU_Id`
+	
+	INNER JOIN `CURsos` as t3
+	ON t2.`CUR_Id`= t3.`CUR_Id`
+	
+	INNER JOIN ALUmnos as t4
+	ON t1.`ALU_Id`= t4.`ALU_Id`
+	
+	WHERE t2.`CUR_Id`= 1
+	GROUP BY t3.`CUR_Nombre`,`ALU_ApeMat`, `ALU_ApePat` , `ALU_Nombres`</string>
+		<string>/*==========================================================================================
+	Listado de Alumno en un Curso
+
+	CURSOS
+	1 = PROGRAMACION
+	2 = BASES DE DATOS
+	3 = DESARROLLO WEB
+	
+	ALUMNOS 
+	1 = ALEJANDRO	VERGARA	GODOY
+	2 = MARIA PAZ	OLGUIN	GAJARDO
+==========================================================================================*/ 
+
+
+
+
+SELECT 
+	t3.`CUR_Nombre` as Curso,
+	CONCAT(`ALU_ApeMat`, ' ' , `ALU_ApePat` , ' ' , `ALU_Nombres`) as Alumno
+  	
+  FROM `NOtasPruebas` as t1
+	INNER JOIN `PRUebas` as t2
+	ON t1.`PRU_Id`= t2.`PRU_Id`
+	
+	INNER JOIN `CURsos` as t3
+	ON t2.`CUR_Id`= t3.`CUR_Id`
+	
+	INNER JOIN ALUmnos as t4
+	ON t1.`ALU_Id`= t4.`ALU_Id`
+	
+	WHERE t2.`CUR_Id`= 1</string>
+		<string>SELECT 
+	t3.`CUR_Nombre` as Curso,
+	CONCAT(`ALU_ApeMat`, ' ' , `ALU_ApePat` , ' ' , `ALU_Nombres`) as Alumno
+  	
+  FROM `NOtasPruebas` as t1
+	INNER JOIN `PRUebas` as t2
+	ON t1.`PRU_Id`= t2.`PRU_Id`
+	
+	INNER JOIN `CURsos` as t3
+	ON t2.`CUR_Id`= t3.`CUR_Id`
+	
+	INNER JOIN ALUmnos as t4
+	ON t1.`ALU_Id`= t4.`ALU_Id`</string>
+		<string>/*==========================================================================================
+	Calculo del promedio de notas de un Alumno en un Curso
+
+	CURSOS
+	1 = PROGRAMACION
+	2 = BASES DE DATOS
+	3 = DESARROLLO WEB
+	
+	ALUMNOS 
+	1 = ALEJANDRO	VERGARA	GODOY
+	2 = MARIA PAZ	OLGUIN	GAJARDO
+==========================================================================================*/ 
+
+SELECT 
+	t3.`CUR_Nombre` as Curso,
+	CONCAT(`ALU_ApeMat`, ' ' , `ALU_ApePat` , ' ' , `ALU_Nombres`) as Alumno,
+
+  	IFNULL(
+  			ROUND(SUM(`NOP_Nota`) / COUNT(`NOP_Nota`))   #Redondeo hacia arriba el Promedio
+  			,0) as PROMEDIO  
+  	
+  	
+  	FROM `NOtasPruebas` as t1
+	INNER JOIN `PRUebas` as t2
+		ON t1.`PRU_Id`= t2.`PRU_Id`
+	
+	INNER JOIN `CURsos` as t3
+		ON t2.`CUR_Id`= t3.`CUR_Id`
+	
+	INNER JOIN ALUmnos as t4
+		ON t1.`ALU_Id`= t4.`ALU_Id`
+	
+	WHERE t3.`CUR_Id` = 1
+	AND t1.`ALU_Id` = 1
+FROM `NOtasPruebas` as t1 
+
+ORDER BY `ALU_Id`</string>
+		<string>/*==========================================================================================
+	Listado de Alumnos y que tengan promedio Rojo
+==========================================================================================*/ 
+
+
+
+select
+
+	(SELECT `PRU_Nombre` FROM  `PRUebas`  WHERE `PRU_Id`= t1.`PRU_Id`   ) as Prueba,
+	(SELECT CONCAT(`ALU_ApeMat`, ' ' , `ALU_ApePat` , ' ' , `ALU_Nombres`) FROM  `ALUmnos`  WHERE `ALU_Id`= t1.`ALU_Id` ) as Alumno,
+  
+ 
+  	`NOP_Nota`
+  
+  
+
+
+
+/*==========================================================================================
+	Calculo del promedio de notas de un Alumno en un Curso
+
+	CURSOS
+	1 = PROGRAMACION
+	2 = BASES DE DATOS
+	3 = DESARROLLO WEB
+	
+	ALUMNOS 
+	1 = ALEJANDRO	VERGARA	GODOY
+	2 = MARIA PAZ	OLGUIN	GAJARDO
+==========================================================================================*/ 
+
+SELECT 
+	t3.`CUR_Nombre` as Curso,
+	CONCAT(`ALU_ApeMat`, ' ' , `ALU_ApePat` , ' ' , `ALU_Nombres`) as Alumno,
+
+  	IFNULL(
+  			ROUND(SUM(`NOP_Nota`) / COUNT(`NOP_Nota`))   #Redondeo hacia arriba el Promedio
+  			,0) as PROMEDIO  
+  	
+  	
+  	FROM `NOtasPruebas` as t1
+	INNER JOIN `PRUebas` as t2
+		ON t1.`PRU_Id`= t2.`PRU_Id`
+	
+	INNER JOIN `CURsos` as t3
+		ON t2.`CUR_Id`= t3.`CUR_Id`
+	
+	INNER JOIN ALUmnos as t4
+		ON t1.`ALU_Id`= t4.`ALU_Id`
+	
+	WHERE t3.`CUR_Id` = 1
+	AND t1.`ALU_Id` = 1
+FROM `NOtasPruebas` as t1 
+
+ORDER BY `ALU_Id`</string>
+		<string>/*==========================================================================================
+	Listado de Alumnos y que tengan promedio Rojo
+==========================================================================================*/ 
+
+
+
+select
+
+	(SELECT `PRU_Nombre` FROM  `PRUebas`  WHERE `PRU_Id`= t1.`PRU_Id`   ) as Prueba,
+	(SELECT CONCAT(`ALU_ApeMat`, ' ' , `ALU_ApePat` , ' ' , `ALU_Nombres`) FROM  `ALUmnos`  WHERE `ALU_Id`= t1.`ALU_Id` ) as Alumno,
+  
+ 
+  	`NOP_Nota`
+  
+  
+FROM `NOtasPruebas` as t1 
+
+ORDER BY `ALU_Id`</string>
+		<string>SELECT 
+	CONCAT(`ALU_ApeMat`, ' ' , `ALU_ApePat` , ' ' , `ALU_Nombres`) as Alumno,
+	t2.`CUR_Nombre` as Curso,
+	
+	
+	(SELECT 
+		IFNULL(
+  			ROUND(SUM(`NOP_Nota`) / COUNT(`NOP_Nota`))   #Redondeo hacia arriba el Promedio
+  			,0) 
+  		FROM `NOtasPruebas` as t10
+			INNER JOIN `PRUebas` as t20
+			ON t10.`PRU_Id`= t20.`PRU_Id`
+  		WHERE 	t10.`ALU_Id` = t1.`ALU_Id`
+  		AND 	t20.`CUR_Id` = t2.`CUR_Id`
+  		
+  		)as PromedioRojo 
+		
+	FROM `CUrsosPersonas` as t1
+	INNER JOIN `CURsos` as t2
+		ON t1.`CUR_Id`= t2.`CUR_Id`
+
+	INNER JOIN ALUmnos as t3
+		ON t1.`ALU_Id`= t3.`ALU_Id`
+
+	
+		
+	WHERE t1.`CUP_Estado`  = 1
+	AND (SELECT 
+		IFNULL(
+  			ROUND(SUM(`NOP_Nota`) / COUNT(`NOP_Nota`))   #Redondeo hacia arriba el Promedio
+  			,0) 
+  		FROM `NOtasPruebas` as t10
+			INNER JOIN `PRUebas` as t20
+			ON t10.`PRU_Id`= t20.`PRU_Id`
+  		WHERE 	t10.`ALU_Id` = t1.`ALU_Id`
+  		AND 	t20.`CUR_Id` = t2.`CUR_Id`
+  		
+  		) &lt;= 39  
+	AND (SELECT 
+		IFNULL(
+  			ROUND(SUM(`NOP_Nota`) / COUNT(`NOP_Nota`))   #Redondeo hacia arriba el Promedio
+  			,0) 
+  		FROM `NOtasPruebas` as t10
+			INNER JOIN `PRUebas` as t20
+			ON t10.`PRU_Id`= t20.`PRU_Id`
+  		WHERE 	t10.`ALU_Id` = t1.`ALU_Id`
+  		AND 	t20.`CUR_Id` = t2.`CUR_Id`
+  		
+  		) &gt; 0</string>
+		<string>/*==========================================================================================
+	Listado de Alumnos y que tengan promedio Rojo
+==========================================================================================*/ 
+
+
+
+select
+
+	(SELECT `PRU_Nombre` FROM  `PRUebas`  WHERE `PRU_Id`= t1.`PRU_Id`   ) as Prueba,
+	(SELECT CONCAT(`ALU_ApeMat`, ' ' , `ALU_ApePat` , ' ' , `ALU_Nombres`) FROM  `ALUmnos`  WHERE `ALU_Id`= t1.`ALU_Id` ) as Alumno,
+  
+ 
+  	`NOP_Nota`
+  
+  
+FROM `NOtasPruebas` as t1 
+
+ORDER BY `ALU_Id`
+  
+/*
+SELECT 
+	CONCAT(`ALU_ApeMat`, ' ' , `ALU_ApePat` , ' ' , `ALU_Nombres`) as Alumno,
+	t2.`CUR_Nombre` as Curso,
+	
+	
+	(SELECT 
+		IFNULL(
+  			ROUND(SUM(`NOP_Nota`) / COUNT(`NOP_Nota`))   #Redondeo hacia arriba el Promedio
+  			,0) 
+  		FROM `NOtasPruebas` as t10
+			INNER JOIN `PRUebas` as t20
+			ON t10.`PRU_Id`= t20.`PRU_Id`
+  		WHERE 	t10.`ALU_Id` = t1.`ALU_Id`
+  		AND 	t20.`CUR_Id` = t2.`CUR_Id`
+  		
+  		)as PromedioRojo 
+		
+	FROM `CUrsosPersonas` as t1
+	INNER JOIN `CURsos` as t2
+		ON t1.`CUR_Id`= t2.`CUR_Id`
+
+	INNER JOIN ALUmnos as t3
+		ON t1.`ALU_Id`= t3.`ALU_Id`
+
+	
+		
+	WHERE t1.`CUP_Estado`  = 1
+	AND (SELECT 
+		IFNULL(
+  			ROUND(SUM(`NOP_Nota`) / COUNT(`NOP_Nota`))   #Redondeo hacia arriba el Promedio
+  			,0) 
+  		FROM `NOtasPruebas` as t10
+			INNER JOIN `PRUebas` as t20
+			ON t10.`PRU_Id`= t20.`PRU_Id`
+  		WHERE 	t10.`ALU_Id` = t1.`ALU_Id`
+  		AND 	t20.`CUR_Id` = t2.`CUR_Id`
+  		
+  		) &lt;= 39  
+	AND (SELECT 
+		IFNULL(
+  			ROUND(SUM(`NOP_Nota`) / COUNT(`NOP_Nota`))   #Redondeo hacia arriba el Promedio
+  			,0) 
+  		FROM `NOtasPruebas` as t10
+			INNER JOIN `PRUebas` as t20
+			ON t10.`PRU_Id`= t20.`PRU_Id`
+  		WHERE 	t10.`ALU_Id` = t1.`ALU_Id`
+  		AND 	t20.`CUR_Id` = t2.`CUR_Id`
+  		
+  		) &gt; 0
+  		
+  		
+  		*/</string>
+		<string>/*==========================================================================================
+	Listado de Alumnos y que tengan promedio Rojo
+==========================================================================================*/ 
+
+
+
+select
+
+	(SELECT `PRU_Nombre` FROM  `PRUebas`  WHERE `PRU_Id`= t1.`PRU_Id`   ) as Prueba,
+	(SELECT CONCAT(`ALU_ApeMat`, ' ' , `ALU_ApePat` , ' ' , `ALU_Nombres`) FROM  `ALUmnos`  WHERE `ALU_Id`= t1.`ALU_Id` ) as Alumno,
+  
+  
+	`NOP_Id`,
+  	`PRU_Id`,
+  	`ALU_Id`,
+  	`NOP_Nota`
+  
+  
+FROM `NOtasPruebas` as t1 
+
+ORDER BY `ALU_Id`
+  
+/*
+SELECT 
+	CONCAT(`ALU_ApeMat`, ' ' , `ALU_ApePat` , ' ' , `ALU_Nombres`) as Alumno,
+	t2.`CUR_Nombre` as Curso,
+	
+	
+	(SELECT 
+		IFNULL(
+  			ROUND(SUM(`NOP_Nota`) / COUNT(`NOP_Nota`))   #Redondeo hacia arriba el Promedio
+  			,0) 
+  		FROM `NOtasPruebas` as t10
+			INNER JOIN `PRUebas` as t20
+			ON t10.`PRU_Id`= t20.`PRU_Id`
+  		WHERE 	t10.`ALU_Id` = t1.`ALU_Id`
+  		AND 	t20.`CUR_Id` = t2.`CUR_Id`
+  		
+  		)as PromedioRojo 
+		
+	FROM `CUrsosPersonas` as t1
+	INNER JOIN `CURsos` as t2
+		ON t1.`CUR_Id`= t2.`CUR_Id`
+
+	INNER JOIN ALUmnos as t3
+		ON t1.`ALU_Id`= t3.`ALU_Id`
+
+	
+		
+	WHERE t1.`CUP_Estado`  = 1
+	AND (SELECT 
+		IFNULL(
+  			ROUND(SUM(`NOP_Nota`) / COUNT(`NOP_Nota`))   #Redondeo hacia arriba el Promedio
+  			,0) 
+  		FROM `NOtasPruebas` as t10
+			INNER JOIN `PRUebas` as t20
+			ON t10.`PRU_Id`= t20.`PRU_Id`
+  		WHERE 	t10.`ALU_Id` = t1.`ALU_Id`
+  		AND 	t20.`CUR_Id` = t2.`CUR_Id`
+  		
+  		) &lt;= 39  
+	AND (SELECT 
+		IFNULL(
+  			ROUND(SUM(`NOP_Nota`) / COUNT(`NOP_Nota`))   #Redondeo hacia arriba el Promedio
+  			,0) 
+  		FROM `NOtasPruebas` as t10
+			INNER JOIN `PRUebas` as t20
+			ON t10.`PRU_Id`= t20.`PRU_Id`
+  		WHERE 	t10.`ALU_Id` = t1.`ALU_Id`
+  		AND 	t20.`CUR_Id` = t2.`CUR_Id`
+  		
+  		) &gt; 0
+  		
+  		
+  		*/</string>
+		<string>/*==========================================================================================
+	Listado de Alumnos y que tengan promedio Rojo
+==========================================================================================*/ 
+
+
+
+select
+
+	(SELECT `PRU_Nombre` FROM  `PRUebas`  WHERE `PRU_Id`= t1.`PRU_Id`   ) as Prueba,
+	(SELECT CONCAT(`ALU_ApeMat`, ' ' , `ALU_ApePat` , ' ' , `ALU_Nombres`) FROM  `ALUmnos`  WHERE `ALU_Id`= t1.`ALU_Id`   ) as Alumno
+  
+  
+	`NOP_Id`,
+  	`PRU_Id`,
+  	`ALU_Id`,
+  	`NOP_Nota`
+  
+  
+FROM `NOtasPruebas` as t1 
+
+ORDER BY `ALU_Id`
+  
+/*
+SELECT 
+	CONCAT(`ALU_ApeMat`, ' ' , `ALU_ApePat` , ' ' , `ALU_Nombres`) as Alumno,
+	t2.`CUR_Nombre` as Curso,
+	
+	
+	(SELECT 
+		IFNULL(
+  			ROUND(SUM(`NOP_Nota`) / COUNT(`NOP_Nota`))   #Redondeo hacia arriba el Promedio
+  			,0) 
+  		FROM `NOtasPruebas` as t10
+			INNER JOIN `PRUebas` as t20
+			ON t10.`PRU_Id`= t20.`PRU_Id`
+  		WHERE 	t10.`ALU_Id` = t1.`ALU_Id`
+  		AND 	t20.`CUR_Id` = t2.`CUR_Id`
+  		
+  		)as PromedioRojo 
+		
+	FROM `CUrsosPersonas` as t1
+	INNER JOIN `CURsos` as t2
+		ON t1.`CUR_Id`= t2.`CUR_Id`
+
+	INNER JOIN ALUmnos as t3
+		ON t1.`ALU_Id`= t3.`ALU_Id`
+
+	
+		
+	WHERE t1.`CUP_Estado`  = 1
+	AND (SELECT 
+		IFNULL(
+  			ROUND(SUM(`NOP_Nota`) / COUNT(`NOP_Nota`))   #Redondeo hacia arriba el Promedio
+  			,0) 
+  		FROM `NOtasPruebas` as t10
+			INNER JOIN `PRUebas` as t20
+			ON t10.`PRU_Id`= t20.`PRU_Id`
+  		WHERE 	t10.`ALU_Id` = t1.`ALU_Id`
+  		AND 	t20.`CUR_Id` = t2.`CUR_Id`
+  		
+  		) &lt;= 39  
+	AND (SELECT 
+		IFNULL(
+  			ROUND(SUM(`NOP_Nota`) / COUNT(`NOP_Nota`))   #Redondeo hacia arriba el Promedio
+  			,0) 
+  		FROM `NOtasPruebas` as t10
+			INNER JOIN `PRUebas` as t20
+			ON t10.`PRU_Id`= t20.`PRU_Id`
+  		WHERE 	t10.`ALU_Id` = t1.`ALU_Id`
+  		AND 	t20.`CUR_Id` = t2.`CUR_Id`
+  		
+  		) &gt; 0
+  		
+  		
+  		*/</string>
+		<string>/*==========================================================================================
+	Listado de Alumnos y que tengan promedio Rojo
+==========================================================================================*/ 
+
+
+
+select
+
+	(SELECT `PRU_Nombre` FROM  `PRUebas`  WHERE `PRU_Id`= t1.`PRU_Id`   )
+  
+  
+	`NOP_Id`,
+  	`PRU_Id`,
+  	`ALU_Id`,
+  	`NOP_Nota`
+  
+  
+FROM `NOtasPruebas` as t1 
+
+ORDER BY `ALU_Id`
+  
+/*
+SELECT 
+	CONCAT(`ALU_ApeMat`, ' ' , `ALU_ApePat` , ' ' , `ALU_Nombres`) as Alumno,
+	t2.`CUR_Nombre` as Curso,
+	
+	
+	(SELECT 
+		IFNULL(
+  			ROUND(SUM(`NOP_Nota`) / COUNT(`NOP_Nota`))   #Redondeo hacia arriba el Promedio
+  			,0) 
+  		FROM `NOtasPruebas` as t10
+			INNER JOIN `PRUebas` as t20
+			ON t10.`PRU_Id`= t20.`PRU_Id`
+  		WHERE 	t10.`ALU_Id` = t1.`ALU_Id`
+  		AND 	t20.`CUR_Id` = t2.`CUR_Id`
+  		
+  		)as PromedioRojo 
+		
+	FROM `CUrsosPersonas` as t1
+	INNER JOIN `CURsos` as t2
+		ON t1.`CUR_Id`= t2.`CUR_Id`
+
+	INNER JOIN ALUmnos as t3
+		ON t1.`ALU_Id`= t3.`ALU_Id`
+
+	
+		
+	WHERE t1.`CUP_Estado`  = 1
+	AND (SELECT 
+		IFNULL(
+  			ROUND(SUM(`NOP_Nota`) / COUNT(`NOP_Nota`))   #Redondeo hacia arriba el Promedio
+  			,0) 
+  		FROM `NOtasPruebas` as t10
+			INNER JOIN `PRUebas` as t20
+			ON t10.`PRU_Id`= t20.`PRU_Id`
+  		WHERE 	t10.`ALU_Id` = t1.`ALU_Id`
+  		AND 	t20.`CUR_Id` = t2.`CUR_Id`
+  		
+  		) &lt;= 39  
+	AND (SELECT 
+		IFNULL(
+  			ROUND(SUM(`NOP_Nota`) / COUNT(`NOP_Nota`))   #Redondeo hacia arriba el Promedio
+  			,0) 
+  		FROM `NOtasPruebas` as t10
+			INNER JOIN `PRUebas` as t20
+			ON t10.`PRU_Id`= t20.`PRU_Id`
+  		WHERE 	t10.`ALU_Id` = t1.`ALU_Id`
+  		AND 	t20.`CUR_Id` = t2.`CUR_Id`
+  		
+  		) &gt; 0
+  		
+  		
+  		*/</string>
+		<string>/*==========================================================================================
+	Listado de Alumnos y que tengan promedio Rojo
+==========================================================================================*/ 
+
+
+
+select
+
+(SELECT `PRU_Nombre` FROM  `PRUebas`  WHERE `PRU_Id`= t1.`PRU_Id`   )
+  
+  
+	`NOP_Id`,
+  	`PRU_Id`,
+  	`ALU_Id`,
+  	`NOP_Nota`
+  
+  
+FROM `NOtasPruebas` as t1 
+  
+/*
+SELECT 
+	CONCAT(`ALU_ApeMat`, ' ' , `ALU_ApePat` , ' ' , `ALU_Nombres`) as Alumno,
+	t2.`CUR_Nombre` as Curso,
+	
+	
+	(SELECT 
+		IFNULL(
+  			ROUND(SUM(`NOP_Nota`) / COUNT(`NOP_Nota`))   #Redondeo hacia arriba el Promedio
+  			,0) 
+  		FROM `NOtasPruebas` as t10
+			INNER JOIN `PRUebas` as t20
+			ON t10.`PRU_Id`= t20.`PRU_Id`
+  		WHERE 	t10.`ALU_Id` = t1.`ALU_Id`
+  		AND 	t20.`CUR_Id` = t2.`CUR_Id`
+  		
+  		)as PromedioRojo 
+		
+	FROM `CUrsosPersonas` as t1
+	INNER JOIN `CURsos` as t2
+		ON t1.`CUR_Id`= t2.`CUR_Id`
+
+	INNER JOIN ALUmnos as t3
+		ON t1.`ALU_Id`= t3.`ALU_Id`
+
+	
+		
+	WHERE t1.`CUP_Estado`  = 1
+	AND (SELECT 
+		IFNULL(
+  			ROUND(SUM(`NOP_Nota`) / COUNT(`NOP_Nota`))   #Redondeo hacia arriba el Promedio
+  			,0) 
+  		FROM `NOtasPruebas` as t10
+			INNER JOIN `PRUebas` as t20
+			ON t10.`PRU_Id`= t20.`PRU_Id`
+  		WHERE 	t10.`ALU_Id` = t1.`ALU_Id`
+  		AND 	t20.`CUR_Id` = t2.`CUR_Id`
+  		
+  		) &lt;= 39  
+	AND (SELECT 
+		IFNULL(
+  			ROUND(SUM(`NOP_Nota`) / COUNT(`NOP_Nota`))   #Redondeo hacia arriba el Promedio
+  			,0) 
+  		FROM `NOtasPruebas` as t10
+			INNER JOIN `PRUebas` as t20
+			ON t10.`PRU_Id`= t20.`PRU_Id`
+  		WHERE 	t10.`ALU_Id` = t1.`ALU_Id`
+  		AND 	t20.`CUR_Id` = t2.`CUR_Id`
+  		
+  		) &gt; 0
+  		
+  		
+  		*/</string>
+		<string>/*==========================================================================================
+	Listado de Alumnos y que tengan promedio Rojo
+==========================================================================================*/ 
+
+
+
+select
+
+	`NOP_Id`,
+  	`PRU_Id`,
+  	`ALU_Id`,
+  	`NOP_Nota`
+  
+  
+FROM `NOtasPruebas` 
+  
+/*
+SELECT 
+	CONCAT(`ALU_ApeMat`, ' ' , `ALU_ApePat` , ' ' , `ALU_Nombres`) as Alumno,
+	t2.`CUR_Nombre` as Curso,
+	
+	
+	(SELECT 
+		IFNULL(
+  			ROUND(SUM(`NOP_Nota`) / COUNT(`NOP_Nota`))   #Redondeo hacia arriba el Promedio
+  			,0) 
+  		FROM `NOtasPruebas` as t10
+			INNER JOIN `PRUebas` as t20
+			ON t10.`PRU_Id`= t20.`PRU_Id`
+  		WHERE 	t10.`ALU_Id` = t1.`ALU_Id`
+  		AND 	t20.`CUR_Id` = t2.`CUR_Id`
+  		
+  		)as PromedioRojo 
+		
+	FROM `CUrsosPersonas` as t1
+	INNER JOIN `CURsos` as t2
+		ON t1.`CUR_Id`= t2.`CUR_Id`
+
+	INNER JOIN ALUmnos as t3
+		ON t1.`ALU_Id`= t3.`ALU_Id`
+
+	
+		
+	WHERE t1.`CUP_Estado`  = 1
+	AND (SELECT 
+		IFNULL(
+  			ROUND(SUM(`NOP_Nota`) / COUNT(`NOP_Nota`))   #Redondeo hacia arriba el Promedio
+  			,0) 
+  		FROM `NOtasPruebas` as t10
+			INNER JOIN `PRUebas` as t20
+			ON t10.`PRU_Id`= t20.`PRU_Id`
+  		WHERE 	t10.`ALU_Id` = t1.`ALU_Id`
+  		AND 	t20.`CUR_Id` = t2.`CUR_Id`
+  		
+  		) &lt;= 39  
+	AND (SELECT 
+		IFNULL(
+  			ROUND(SUM(`NOP_Nota`) / COUNT(`NOP_Nota`))   #Redondeo hacia arriba el Promedio
+  			,0) 
+  		FROM `NOtasPruebas` as t10
+			INNER JOIN `PRUebas` as t20
+			ON t10.`PRU_Id`= t20.`PRU_Id`
+  		WHERE 	t10.`ALU_Id` = t1.`ALU_Id`
+  		AND 	t20.`CUR_Id` = t2.`CUR_Id`
+  		
+  		) &gt; 0
+  		
+  		
+  		*/</string>
+		<string>/*==========================================================================================
+	Listado de Alumnos y que tengan promedio Rojo
+==========================================================================================*/ 
+
+
+
+select
+	`NOP_Id`,
+  	`PRU_Id`,
+  	`ALU_Id`,
+  	`NOP_Nota`
+  
+  
+FROM `NOtasPruebas` (
+  
+/*
+SELECT 
+	CONCAT(`ALU_ApeMat`, ' ' , `ALU_ApePat` , ' ' , `ALU_Nombres`) as Alumno,
+	t2.`CUR_Nombre` as Curso,
+	
+	
+	(SELECT 
+		IFNULL(
+  			ROUND(SUM(`NOP_Nota`) / COUNT(`NOP_Nota`))   #Redondeo hacia arriba el Promedio
+  			,0) 
+  		FROM `NOtasPruebas` as t10
+			INNER JOIN `PRUebas` as t20
+			ON t10.`PRU_Id`= t20.`PRU_Id`
+  		WHERE 	t10.`ALU_Id` = t1.`ALU_Id`
+  		AND 	t20.`CUR_Id` = t2.`CUR_Id`
+  		
+  		)as PromedioRojo 
+		
+	FROM `CUrsosPersonas` as t1
+	INNER JOIN `CURsos` as t2
+		ON t1.`CUR_Id`= t2.`CUR_Id`
+
+	INNER JOIN ALUmnos as t3
+		ON t1.`ALU_Id`= t3.`ALU_Id`
+
+	
+		
+	WHERE t1.`CUP_Estado`  = 1
+	AND (SELECT 
+		IFNULL(
+  			ROUND(SUM(`NOP_Nota`) / COUNT(`NOP_Nota`))   #Redondeo hacia arriba el Promedio
+  			,0) 
+  		FROM `NOtasPruebas` as t10
+			INNER JOIN `PRUebas` as t20
+			ON t10.`PRU_Id`= t20.`PRU_Id`
+  		WHERE 	t10.`ALU_Id` = t1.`ALU_Id`
+  		AND 	t20.`CUR_Id` = t2.`CUR_Id`
+  		
+  		) &lt;= 39  
+	AND (SELECT 
+		IFNULL(
+  			ROUND(SUM(`NOP_Nota`) / COUNT(`NOP_Nota`))   #Redondeo hacia arriba el Promedio
+  			,0) 
+  		FROM `NOtasPruebas` as t10
+			INNER JOIN `PRUebas` as t20
+			ON t10.`PRU_Id`= t20.`PRU_Id`
+  		WHERE 	t10.`ALU_Id` = t1.`ALU_Id`
+  		AND 	t20.`CUR_Id` = t2.`CUR_Id`
+  		
+  		) &gt; 0
+  		
+  		
+  		*/</string>
+		<string>/*==========================================================================================
+	Listado de Alumnos y con más de un Promedio en Rojo
+==========================================================================================*/ 
+
+SELECT 
+	CONCAT(`ALU_ApeMat`, ' ' , `ALU_ApePat` , ' ' , `ALU_Nombres`) as Alumno,
+	t2.`CUR_Nombre` as Curso,
+	
+	
+	(SELECT 
+		IFNULL(
+  			ROUND(SUM(`NOP_Nota`) / COUNT(`NOP_Nota`))   #Redondeo hacia arriba el Promedio
+  			,0) 
+  		FROM `NOtasPruebas` as t10
+			INNER JOIN `PRUebas` as t20
+			ON t10.`PRU_Id`= t20.`PRU_Id`
+  		WHERE 	t10.`ALU_Id` = t1.`ALU_Id`
+  		AND 	t20.`CUR_Id` = t2.`CUR_Id`
+  		
+  		)as PromedioRojo 
+		
+	FROM `CUrsosPersonas` as t1
+	INNER JOIN `CURsos` as t2
+		ON t1.`CUR_Id`= t2.`CUR_Id`
+
+	INNER JOIN ALUmnos as t3
+		ON t1.`ALU_Id`= t3.`ALU_Id`
+
+	
+		
+	WHERE t1.`CUP_Estado`  = 1
+	AND (SELECT 
+		IFNULL(
+  			ROUND(SUM(`NOP_Nota`) / COUNT(`NOP_Nota`))   #Redondeo hacia arriba el Promedio
+  			,0) 
+  		FROM `NOtasPruebas` as t10
+			INNER JOIN `PRUebas` as t20
+			ON t10.`PRU_Id`= t20.`PRU_Id`
+  		WHERE 	t10.`ALU_Id` = t1.`ALU_Id`
+  		AND 	t20.`CUR_Id` = t2.`CUR_Id`
+  		
+  		) &lt;= 39  
+	AND (SELECT 
+		IFNULL(
+  			ROUND(SUM(`NOP_Nota`) / COUNT(`NOP_Nota`))   #Redondeo hacia arriba el Promedio
+  			,0) 
+  		FROM `NOtasPruebas` as t10
+			INNER JOIN `PRUebas` as t20
+			ON t10.`PRU_Id`= t20.`PRU_Id`
+  		WHERE 	t10.`ALU_Id` = t1.`ALU_Id`
+  		AND 	t20.`CUR_Id` = t2.`CUR_Id`
+  		
+  		) &gt; 0</string>
+		<string>/*==========================================================================================
+	Listado de Alumnos y con más de un Promedio en Rojo
+==========================================================================================*/ 
+
+SELECT 
+	CONCAT(`ALU_ApeMat`, ' ' , `ALU_ApePat` , ' ' , `ALU_Nombres`) as Alumno,
+	t2.`CUR_Nombre` as Curso,
+	
+	
+	(SELECT 
+		IFNULL(
+  			ROUND(SUM(`NOP_Nota`) / COUNT(`NOP_Nota`))   #Redondeo hacia arriba el Promedio
+  			,0) 
+  		FROM `NOtasPruebas` as t10
+			INNER JOIN `PRUebas` as t20
+			ON t10.`PRU_Id`= t20.`PRU_Id`
+  		WHERE 	t10.`ALU_Id` = t1.`ALU_Id`
+  		AND 	t20.`CUR_Id` = t2.`CUR_Id`
+  		
+  		)as PROMEDIO  
+		
+	FROM `CUrsosPersonas` as t1
+	INNER JOIN `CURsos` as t2
+		ON t1.`CUR_Id`= t2.`CUR_Id`
+
+	INNER JOIN ALUmnos as t3
+		ON t1.`ALU_Id`= t3.`ALU_Id`
+
+	
+		
+	WHERE t1.`CUP_Estado`  = 1
+	AND (SELECT 
+		IFNULL(
+  			ROUND(SUM(`NOP_Nota`) / COUNT(`NOP_Nota`))   #Redondeo hacia arriba el Promedio
+  			,0) 
+  		FROM `NOtasPruebas` as t10
+			INNER JOIN `PRUebas` as t20
+			ON t10.`PRU_Id`= t20.`PRU_Id`
+  		WHERE 	t10.`ALU_Id` = t1.`ALU_Id`
+  		AND 	t20.`CUR_Id` = t2.`CUR_Id`
+  		
+  		) &lt;= 39  
+	AND (SELECT 
+		IFNULL(
+  			ROUND(SUM(`NOP_Nota`) / COUNT(`NOP_Nota`))   #Redondeo hacia arriba el Promedio
+  			,0) 
+  		FROM `NOtasPruebas` as t10
+			INNER JOIN `PRUebas` as t20
+			ON t10.`PRU_Id`= t20.`PRU_Id`
+  		WHERE 	t10.`ALU_Id` = t1.`ALU_Id`
+  		AND 	t20.`CUR_Id` = t2.`CUR_Id`
+  		
+  		) &gt; 0
+  		
+  	-- GROUP BY</string>
+	</array>
+	<key>rdbms_type</key>
+	<string>mysql</string>
+	<key>rdbms_version</key>
+	<string>5.5.43-0+deb8u1</string>
+	<key>version</key>
+	<integer>1</integer>
+</dict>
+</plist>
