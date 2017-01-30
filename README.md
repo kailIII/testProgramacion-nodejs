@@ -51,11 +51,24 @@ ___________________________________________________________________________
 
 #### 1.- Modelo de datos relacional que permita administrar los cursos de un colegio. Cada cursos tiene un profesor a cargo, cada alumno  ####
 
-[Ver Carpeta](https://github.com/mortegac/testProgramacion-nodejs/tree/master/modelo-datos)
-
 ![alt tag](http://apgca.cl/bin/test/ModeloColegio.png)
 
 
+[Ver Carpeta](https://github.com/mortegac/testProgramacion-nodejs/tree/master/modelo-datos)
+
+#### 2.- Query con Listado de Alumnos en un curso #### 
+[Ver Query](https://github.com/mortegac/testProgramacion-nodejs/blob/master/modelo-datos/2-ListaAlumCursos.sql) 
+
+#### 3.- Query qeu calcula el promedio de notas de una alumno en un curso #### 
+[Ver Query](https://github.com/mortegac/testProgramacion-nodejs/blob/master/modelo-datos/3-CalculaPromedioAlumCursos.sql) 
+
+#### 4.- Query qye lista los alumnos y el promedio obtenido en casa Ramo#### 
+[Ver Query](https://github.com/mortegac/testProgramacion-nodejs/blob/master/modelo-datos/4-ListaAlumnosPromedios.sql) 
+
+#### 5.- Query que lista solo los alumnos con promedios Rojos#### 
+[Ver Query](https://github.com/mortegac/testProgramacion-nodejs/blob/master/modelo-datos/5-ListaAlumnosPromediosRojos.sql) 
+
+[Ver Dump Base de Datos en Mysql](https://github.com/mortegac/testProgramacion-nodejs/blob/master/modelo-datos/COLEGIO-NEW_2017-01-30.sql) 
 
 
 #DISEÑO#
