@@ -14,7 +14,7 @@ $ npm install
 #PROGRAMACION#
 ___________________________________________________________________________
 
-### 1.- Determinar la cantidad de 0`s a la derecha de n!(Factorial) ###
+#### 1.- Determinar la cantidad de 0`s a la derecha de n!(Factorial) ####
 	
 	Script que calcula el factorial de un número, calcula la cantidad de zeros
 	que tiene el factorial calculado
@@ -23,13 +23,14 @@ ___________________________________________________________________________
 	```
 	$ node CalculaFactorial.js
 	```
-	![alt tag](http://apgca.cl/bin/test/factorial.png)
+
+![alt tag](http://apgca.cl/bin/test/factorial.png)
 
 
 
 
 
-### 2.- Transformar de Numeros a letras ###
+#### 2.- Transformar de Numeros a letras ####
 
 	Script que de un numero ingresado retorna su conversión a letras
 
@@ -37,28 +38,29 @@ ___________________________________________________________________________
 	```
 	$ node NumeroaLetras.js
 	```
-	![alt tag](http://apgca.cl/bin/test/numeroLetras.png)
+
+![alt tag](http://apgca.cl/bin/test/numeroLetras.png)
 
 
 
-### 3.- Algoritmo que visita los movimientos de un caballo en un tablero de NxN ###
+#### 3.- Algoritmo que visita los movimientos de un caballo en un tablero de NxN ####
 
 
 #MODELO DE DATOS#
 ___________________________________________________________________________
 
-### 1.- Modelo de datos relacional que permita administrar los cursos de un colegio. Cada cursos tiene un profesor a cargo, cada alumno 
+#### 1.- Modelo de datos relacional que permita administrar los cursos de un colegio. Cada cursos tiene un profesor a cargo, cada alumno  ####
 
 
 
 #DISEÑO#
 ___________________________________________________________________________
 
-### 1.- Desarrollo de Clases (orientado a objetos) que cumplan con el modelo de datos Colegio
+#### 1.- Desarrollo de Clases (orientado a objetos) que cumplan con el modelo de datos Colegio ####
 
-### 2.- Desarrollo de mazo de cartas (orientado a objetos)
+#### 2.- Desarrollo de mazo de cartas (orientado a objetos) ####
 
-### 3.- Desarrollo de agenda médica desde un objeto Json.  Los rangos de los horarios superiores e inferiores se calculan según lso datos del Json
+#### 3.- Desarrollo de agenda médica desde un objeto Json.  Los rangos de los horarios superiores e inferiores se calculan según lso datos del Json####
 ![alt tag](http://apgca.cl/bin/test/agenda.png)
 
 
