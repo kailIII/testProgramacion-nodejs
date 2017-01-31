@@ -78,7 +78,19 @@ ___________________________________________________________________________
 
 #### 1.- Desarrollo de Clases (orientado a objetos) que cumplan con el modelo de datos Colegio ####
 
+Para Ejecutarlo:  En el terminal escribir:
+	```
+	$ node /diseno/colegio.js
+	```
+[Ver Archivo](https://github.com/mortegac/testProgramacion-nodejs/blob/master/diseno/colegio.js) 
+
 #### 2.- Desarrollo de mazo de cartas (orientado a objetos) ####
+
+Para Ejecutarlo:  En el terminal escribir:
+	```
+	$ node /diseno/mazoCartas.js
+	```
+[Ver Archivo](https://github.com/mortegac/testProgramacion-nodejs/blob/master/diseno/mazoCartas.js) 
 
 #### 3.- Desarrollo de agenda médica desde un objeto Json.  Los rangos de los horarios superiores e inferiores se calculan según lso datos del Json####
 ![alt tag](http://apgca.cl/bin/test/agenda.png)
